@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>The Door — Keep Talking and Nobody Explodes Module</title>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/ktane-utils.js"></script>
+</head>
+<body>
+    <div class="section">
+        <div class="page page-bg-01">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">The Door</span>
+            </div>
+            <div class="page-content">
+                <img src="img/Component/The Door.svg" class="diagram">
+                <h2>On the Subject of The Door</h2>
+                <p class="flavour-text">Why is it called The Door if it has two doors?</p>
+
+                <p>This module displays 2 doors and two buttons. It requires two door and button inputs to solve.</p>
+
+                <h3>Calculating floors</h3>
+                To find your starting number:
+                <ul>
+                    <li>If the starting time (in seconds) modulo 600 is more than 300, the starting floor amount is 2.</li>
+                    <li>Else, the starting floor amount is 5.
+                </ul>
+
+                Now modify this number in the order shown:
+                <ul>
+                    <li>If the bomb has 1 or more strikes, modulo your number by 5.</li>
+                    <li>If the bomb has 3 or more strikes, add 3 to your number.</li>
+                    <li>If there are 5 or more batteries, multiply your number by 3.</li>
+                    <li>If there are 3 or more battery holders, take away 2 from your number.</li>
+                    <li>If there are 2 or more ports, multiply your number by 4.</li>
+                    <li>If there are 3 or more port plates, multiply your number by 2.</li>
+                </ul>
+
+                The result is how many floors you have to climb.
+
+                <h3>STAGE 1</h3>
+
+                To work out the correct door for advancing:
+                <ul>
+                    <li>If you have to go up 15 floors or less, the first door works.</li>
+                    <li>If you have to go up 16 floors or more, the second door works.</li>
+                </ul>
+
+                <h3>STAGE 2</h3>
+
+                To work out the correct button for advancing:
+                <ul>
+                    <li>If there is a two factor code, the bottom button will work.</li>
+                    <li>If there is NOT a two factor code, the top one will work.</li>
+                </ul>
+            </div>
+            <div class="page-footer relative-footer">Page 1 of 2</div>
+        </div>
+        <div class="page page-bg-01">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">The Door</span>
+            </div>
+            <div class="page-content">
+                <h3>STAGE 3</h3>
+
+                To find the next correct door:
+                <ul>
+                    <li>If the amount of floors you need to go up is 30 or less, the first is correct.</li>
+                    <li>If the amount of floors you need to go up is 31 or more, the second is correct.</li>
+                </ul>
+
+                <h3>Solving</h3>
+
+                After advancing using the correct door and button sequence, press any button to complete the module.
+
+                <h3>Striking</h3>
+
+                If the inputted door or button is invalid, the module will strike you and reset you to stage 1, recalculating the required amount of floors in the process.
+                Note that pressing a door when you have to press a button or vice versa will NOT strike you.
+            </div>
+            <div class="page-footer relative-footer">Page 2 of 2</div>
+        </div>
+    </div>
+</body>
+</html>

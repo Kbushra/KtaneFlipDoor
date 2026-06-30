@@ -20,6 +20,7 @@ public class SimpleModuleScript : MonoBehaviour {
 	private int StageCur = 1;
 	private int StageLim = 4;
 	private int strikecount = 0;
+    private float startTime = 0;
 
 	bool _isSolved = false;
 	bool incorrect = false;
@@ -43,18 +44,9 @@ public class SimpleModuleScript : MonoBehaviour {
 	{
 		StageCur = 1;
 		StageLim = 4;
+        startTime = info.GetTime();
 
-		if (info.GetTime() % 600 > 300)
-		{
-			ans = 2;
-			Log ("ans headstart is 2");
-		}  
-		if (info.GetTime() % 600 < 301) 
-		{
-			ans = 5;
-			Log ("ans headstart is 5");
-		}
-		Invoke ("AnsAdder", 0);
+        CalcAns();
 	}
 
 	void Update()
@@ -63,43 +55,52 @@ public class SimpleModuleScript : MonoBehaviour {
 		if (curstrikecount != strikecount) 
 		{
 			strikecount = curstrikecount;
-			AnsAdder ();
+			CalcAns();
 		}
 	}
 
-	void AnsAdder()
+	void CalcAns()
 	{
-		if (info.GetStrikes() > 0) 
+		ans = (startTime % 600 > 300) ? 2 : 5;
+		Log(string.Format("Starting answer is {0}", ans));
+
+		if (info.GetStrikes() >= 1)
 		{
-				ans = ans % 5;
-			Log ("answer mod 5");
+			ans %= 5;
+			Log("Strikes >= 1, Answer %= 5");
 		}
-			if (info.GetStrikes() > 2) 
+
+		if (info.GetStrikes() >= 3) 
 		{
-				ans = ans + 3;
-			Log ("answer plus 3");
+			ans += 3;
+			Log("Strikes >= 3, Answer += 3");
 		}
-			if (info.GetBatteryCount () > 4) 
+
+		if (info.GetBatteryCount () >= 5) 
 		{
-				ans = ans * 3;
-			Log ("answer times 3");
+			ans *= 3;
+			Log("Battery count >= 5, Answer *= 3");
 		}
-			if (info.GetBatteryHolderCount () > 2) 
+
+		if (info.GetBatteryHolderCount () >= 3) 
 		{
-				ans = ans - 2;
-			Log ("answer take away 2");
+			ans -= 2;
+			Log("Battery holder count >= 3, Answer -= 2");
 		}
-		if (info.GetPortCount () > 1) 
+
+		if (info.GetPortCount () >= 2) 
 		{
-			ans = ans * 4;
-			Log ("answer times 4");
+			ans *= 4;
+			Log("Port count >= 2, Answer *= 4");
 		}
-		if (info.GetPortPlateCount () > 2) 
+
+		if (info.GetPortPlateCount () >= 3) 
 		{
-			ans = ans * 2;
-			Log ("answer times 2");
+			ans *= 2;
+			Log("Port plate count >= 3, Answer *= 2");
 		}
-		Debug.LogFormat("[The Door #{0}] Answer is now {1}", ModuleId, ans);
+
+		Log(string.Format("Final answer is {0}", ans));
 	}
 
 
